@@ -49,6 +49,8 @@ def Conv_(input, inputshift, weight, weightshift, stride, padding, name = None,d
     filter_size = weight.size()
     input_size = input.size()
     m = nn.ConstantPad2d(padding, 0)
+    if isinstance(padding, tuple):
+        padding = padding[0]
     o_height = input_size[2] + padding * 2 - filter_size[2] + 1
     o_width = input_size[3] + padding * 2 - filter_size[3] + 1
     
@@ -323,7 +325,9 @@ def Conv_(input, inputshift, weight, weightshift, stride, padding, name = None,d
                 np.save(partial_sum_dummy2_name, d2_array)
             if not skip_ref3 and DigitRef3 == "False":
                 np.save(partial_sum_dummy3_name, d3_array)
-            
-              
-                    
-    return output[:,:,::stride[0],::stride[1]].float()
+    
+    if isinstance(stride[0], list) or isinstance(stride[0], tuple):     
+        stride_h, stride_w = stride[0]
+    else:
+        stride_h, stride_w = stride                                  
+    return output[:, :, ::stride_h, ::stride_w].float()

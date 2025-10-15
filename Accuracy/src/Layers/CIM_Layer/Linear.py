@@ -42,6 +42,17 @@ if hardware == "True":
     if adc_mode == "NLinear":
         from Accuracy.src.Component.ADC.NLinearMode import NLinear as adc
 
+def ensure_2d(tensor):
+    """确保张量是2D的，用于torch.mm操作"""
+    if tensor.dim() != 2:
+        if tensor.dim() == 1:
+            return tensor.unsqueeze(0)  # 添加batch维度
+        else:
+            # 如果是多维张量，重塑为2D
+            batch_size = tensor.shape[0]
+            return tensor.view(batch_size, -1)
+    return tensor
+
 def Linear_(input, inputshift, weight, weightshift, name=None, dumpname=None):
     output = None
     # testadc = adc(name)
@@ -174,12 +185,17 @@ def Linear_(input, inputshift, weight, weightshift, name=None, dumpname=None):
 
                         weight_b = digit2cell.map2G(weight_b) 
                         
+                        # 确保input_b和weight_b都是2D矩阵
+                        input_b = ensure_2d(input_b)
+                        weight_b = ensure_2d(weight_b)
+                        
                         partial_output_b_sum = torch.mm(input_b, weight_b.transpose(0,1))
 
 
                         if not skip_ref1:
                             #if inputshift_b there is no need to apply it to the array
-                            dummy_partial_output_b_sum1 = torch.mm((input_dummy * inputshift_b), weight_b.transpose(0,1))
+                            input_dummy_mult = ensure_2d(input_dummy * inputshift_b)
+                            dummy_partial_output_b_sum1 = torch.mm(input_dummy_mult, weight_b.transpose(0,1))
 
                         if not skip_ref2:
                             # the ref2 could be used to shift the weight while cancel the gmin of the normal array with the same input.
