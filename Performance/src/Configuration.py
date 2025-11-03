@@ -5,7 +5,7 @@ class configuration():
         self.modeltype='cnn'
         self.numBitInput = 8
         # self.numBitWeight = 8
-        self.numBitWeight = 3
+        self.numBitWeight = 8
         # "Unsign" "Sign"
         self.weightmapping = "Sign"
         self.inputmapping = "Sign"
@@ -135,11 +135,11 @@ class configuration():
 
         
         #################################################################
-        self.StaticMVMmemcelltype = 3
+        self.StaticMVMmemcelltype = 2
         #1: cell.memCellType = Type::SRAM
         #2: cell.memCellType = Type::RRAM
         #3: cell.memCellType = Type::FeFET
-        self.StaticMVMCellBit = 2 # SRAM=1, RRAM=1,2,4
+        self.StaticMVMCellBit = 3 # SRAM=1, RRAM=1,2,4
         self.StaticMVMresistanceOn = 240*1e3                    #// Ron resistance at Vr in the reported measurement data (need to recalculate below if considering the nonlinearity)
         self.StaticMVMresistanceOff = 240*1e5          #// Roff resistance at Vr in the reported measurement dat (need to recalculate below if considering the nonlinearity)
         self.StaticMVMresistanceAccess = self.StaticMVMresistanceOn*0.25

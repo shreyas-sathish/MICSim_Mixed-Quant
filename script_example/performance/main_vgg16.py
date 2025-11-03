@@ -16,21 +16,21 @@ layer_list = layer_list = [
             # MaxPool: 112 -> 56
             
             # Block 3: Input 56x56
-            [3, 3, 128, 256,  56,  56, 1, 1, 1, average_file_path + 'conv3_1.csv', average_file_path + 'conv3_1_shift.csv', 'conv3_1', 'Conv', 8, 8],
-            [3, 3, 256, 256,  56,  56, 1, 1, 1, average_file_path + 'conv3_2.csv', average_file_path + 'conv3_2_shift.csv', 'conv3_2', 'Conv', 8, 8],
-            [3, 3, 256, 256,  56,  56, 1, 1, 1, average_file_path + 'conv3_3.csv', average_file_path + 'conv3_3_shift.csv', 'conv3_3', 'Conv', 8, 8],
+            [3, 3, 128, 256,  56,  56, 1, 1, 1, average_file_path + 'conv3_1.csv', average_file_path + 'conv3_1_shift.csv', 'conv3_1', 'Conv', 4, 8],
+            [3, 3, 256, 256,  56,  56, 1, 1, 1, average_file_path + 'conv3_2.csv', average_file_path + 'conv3_2_shift.csv', 'conv3_2', 'Conv', 4, 8],
+            [3, 3, 256, 256,  56,  56, 1, 1, 1, average_file_path + 'conv3_3.csv', average_file_path + 'conv3_3_shift.csv', 'conv3_3', 'Conv', 4, 8],
             # MaxPool: 56 -> 28
             
             # Block 4: Input 28x28
-            [3, 3, 256, 512,  28,  28, 1, 1, 1, average_file_path + 'conv4_1.csv', average_file_path + 'conv4_1_shift.csv', 'conv4_1', 'Conv', 8, 8],
-            [3, 3, 512, 512,  28,  28, 1, 1, 1, average_file_path + 'conv4_2.csv', average_file_path + 'conv4_2_shift.csv', 'conv4_2', 'Conv', 7, 8],
-            [3, 3, 512, 512,  28,  28, 1, 1, 1, average_file_path + 'conv4_3.csv', average_file_path + 'conv4_3_shift.csv', 'conv4_3', 'Conv', 5, 8],
+            [3, 3, 256, 512,  28,  28, 1, 1, 1, average_file_path + 'conv4_1.csv', average_file_path + 'conv4_1_shift.csv', 'conv4_1', 'Conv', 4, 8],
+            [3, 3, 512, 512,  28,  28, 1, 1, 1, average_file_path + 'conv4_2.csv', average_file_path + 'conv4_2_shift.csv', 'conv4_2', 'Conv', 4, 8],
+            [3, 3, 512, 512,  28,  28, 1, 1, 1, average_file_path + 'conv4_3.csv', average_file_path + 'conv4_3_shift.csv', 'conv4_3', 'Conv', 4, 8],
             # MaxPool: 28 -> 14
             
             # Block 5: Input 14x14
-            [3, 3, 512, 512,  14,  14, 1, 1, 1, average_file_path + 'conv5_1.csv', average_file_path + 'conv5_1_shift.csv', 'conv5_1', 'Conv', 2, 8],
-            [3, 3, 512, 512,  14,  14, 1, 1, 1, average_file_path + 'conv5_2.csv', average_file_path + 'conv5_2_shift.csv', 'conv5_2', 'Conv', 2, 8],
-            [3, 3, 512, 512,  14,  14, 1, 1, 1, average_file_path + 'conv5_3.csv', average_file_path + 'conv5_3_shift.csv', 'conv5_3', 'Conv', 2, 8],
+            [3, 3, 512, 512,  14,  14, 1, 1, 1, average_file_path + 'conv5_1.csv', average_file_path + 'conv5_1_shift.csv', 'conv5_1', 'Conv', 4, 8],
+            [3, 3, 512, 512,  14,  14, 1, 1, 1, average_file_path + 'conv5_2.csv', average_file_path + 'conv5_2_shift.csv', 'conv5_2', 'Conv', 4, 8],
+            [3, 3, 512, 512,  14,  14, 1, 1, 1, average_file_path + 'conv5_3.csv', average_file_path + 'conv5_3_shift.csv', 'conv5_3', 'Conv', 4, 8],
             # MaxPool: 14 -> 7
             
             # AdaptiveAvgPool: 7x7 -> 1x1
