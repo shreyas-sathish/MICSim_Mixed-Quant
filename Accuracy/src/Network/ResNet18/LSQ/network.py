@@ -16,6 +16,8 @@ Num_Class = int(config['Network']['numClass'])
 
 from Accuracy.src.Layers.QLayer.CNN.QConv2d import QConv2d
 from Accuracy.src.Layers.QLayer.CNN.QLinear import QLinear
+# from Accuracy.src.Layers.QLayer.CNN.QConv2d_custom import QConv2d
+# from Accuracy.src.Layers.QLayer.CNN.QLinear_custom import QLinear
 from torch.hub import load_state_dict_from_url
 
 __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',

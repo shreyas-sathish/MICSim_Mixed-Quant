@@ -25,16 +25,59 @@ dump_average_value = config['Quantization']['dumpaveragevalue']
 test_10 = False
 
 class Tester():
-    def __init__(self,model,train_loader,test_loader):
+    def __init__(self,model,train_loader,test_loader, layerwise_bits=None):
         self.model = model
         self.train_loader = train_loader
         self.test_loader = test_loader
+        self.layerwise_bits = layerwise_bits or []
         self.optimizer = optimizer.optimizer(self.model)
         self.criterion = optimizer.loss_func()
         self.cuda = torch.cuda.is_available()
         self.best_acc = 0
         self.old_file = None
         self.logdir =  make_path.makepath_logdir()
+        self.layerwise_bits = layerwise_bits or []
+
+        if self.layerwise_bits:
+            self.apply_layerwise_config(self.model, self.layerwise_bits)
+        
+    def apply_layerwise_config(self, model, layerwise_bits):
+        """
+        layerwise_bits: list of tuples (layer_name, weight_bits, act_bits, scaling)
+        Attaches scaling and per-layer quantization precision attributes.
+        """
+        config_map = {n: (w, a, s) for (n, w, a, s) in layerwise_bits}
+
+        for full_name, module in model.named_modules():
+            if full_name == '':
+                continue
+            for lname, (wbits, abits, scale) in config_map.items():
+                if full_name.endswith(lname) or lname in full_name:
+                    setattr(module, 'scaling', float(scale))
+                    if hasattr(module, 'quantizer') and module.quantizer is not None:
+                        setattr(module.quantizer, 'layer_weight_precision', int(wbits))
+                        setattr(module.quantizer, 'layer_input_precision', int(abits))
+                    break
+                
+        try:
+            from Accuracy.src.utils import misc
+            logger = misc.logger.info
+            logger("Applied layer-wise quantization configuration:")
+            for full_name, module in model.named_modules():
+                if hasattr(module, 'scaling') or (
+                    hasattr(module, 'quantizer') 
+                    and getattr(module.quantizer, 'layer_weight_precision', None) is not None
+                ):
+                    logger(
+                        f"\t{full_name}: scaling={getattr(module, 'scaling', 1.0)}, "
+                        f"wbits={getattr(module.quantizer, 'layer_weight_precision', 'NA') if hasattr(module, 'quantizer') else 'NA'}, "
+                        f"abits={getattr(module.quantizer, 'layer_input_precision', 'NA') if hasattr(module, 'quantizer') else 'NA'}"
+                    )
+        except Exception:
+            pass
+
+
+
 
     def _val(self):
         

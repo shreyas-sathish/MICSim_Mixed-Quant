@@ -47,4 +47,4 @@ class Digit2Cell():
             cell_g = weight_g_clean
             weight_b =  cell_g/self.delta_g
             
-        return weight_b            
+        return weight_b

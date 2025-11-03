@@ -8,13 +8,16 @@ from Accuracy.src.Modules.CNN import datasets
 from Accuracy.src.utils.seeds import set_seed
 from datetime import datetime
 
-set_seed(24)
+set_seed(42)
 # ====================init config path=========================
 n = len(sys.argv)
+# print(n, " received")
 if n == 2:
     os.environ['CONFIG'] = sys.argv[1]
 else:
-    os.environ['CONFIG'] = './Accuracy/config/vgg8/config_vgg_lsq_infer.ini'
+    # os.environ['CONFIG'] = './Accuracy/config/vgg8/config_vgg_lsq_infer.ini'
+    # os.environ['CONFIG'] = './Accuracy/config/resnet18/config_resnet18_lsq_infer.ini'
+    os.environ['CONFIG'] = './Accuracy/config/resnet18/config_resnet18_wage_infer.ini'
 # ====================init config path===========================
 
 # ==================init the log================================

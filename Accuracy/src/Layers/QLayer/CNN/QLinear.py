@@ -61,6 +61,7 @@ else:
     raise ValueError("Unknown weightmapping")
 
 
+
 class QLinear(nn.Linear):
     """docstring for QLinear."""
 
@@ -76,6 +77,8 @@ class QLinear(nn.Linear):
         self.quantize_weight = quantize_weight
         self.quantize_input = quantize_input
         self.quantize_error = quantize_error
+
+
             
 
     def forward(self, input):    

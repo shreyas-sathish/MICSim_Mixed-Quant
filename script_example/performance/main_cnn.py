@@ -1,7 +1,8 @@
 from Performance.src.CNN.Network import Network
 
 
-average_file_path = '/home/wangcong/projects/MICSim_V1.0/average_files/WAGE3/Device/FeFET/'
+# average_file_path = './average_files/WAGE3/Device/FeFET/'
+average_file_path = './average_files/WAGE3/Device/RRAM2/'
 
 layer_list = [
             [3, 3, 3,   128, 32, 32, 1, 1, 0,average_file_path + 'layer1.csv',average_file_path + 'layer1weight_shift.csv', 'layer1', 'Conv'],
@@ -24,4 +25,4 @@ VGG8 = Network(layer_list)
 VGG8.Map()
 VGG8.Configure()
 VGG8.CalculateArea()
-VGG8.CalculatePerformance()
+VGG8.CalculatePerformance()At the top of script_example/performance/main_cnn.py, you already have an import like this (the path might be slightly different depending on your setup):

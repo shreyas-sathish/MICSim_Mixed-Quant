@@ -15,9 +15,9 @@ ext_modules = [
         'Bus.cpp'             ,'DeMux.cpp'            ,'FunctionUnit.cpp'           ,'MaxPooling.cpp'       ,'neurosim.cpp','Precharger.cpp',
         'SarADC.cpp'          ,'SRAMWriteDriver.cpp'  ,'Tile.cpp'                   ,'RecfgAdderTree.cpp'   ,'Multiplier.cpp'
         ],
-        include_dirs=['/home/wangcong/anaconda3/lib/python3.11/site-packages/pybind11/include'],
+        include_dirs=['/home/shreyas/miniconda3/envs/MICSim/lib/python3.8/site-packages/pybind11/include'],
         # use the  pybind11 path in your computer
-        
+    extra_compile_args=['-std=c++11', '-include', 'cstdint'],    
     language='c++',
     ),
 ]

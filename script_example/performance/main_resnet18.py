@@ -4,7 +4,8 @@ import time
 # average_file_path = '/home/wangcong/projects/cimsimulator/average_files/ResNet18/LSQ4/CASE1/'
 # average_file_path = '/home/wangcong/projects/cimsimulator/average_files/ResNet18/WAGE7/CASE1/'
 
-average_file_path = '/home/wangcong/projects/cimsimulator/average_files/ResNet18/LSQ4/ADC/2bit/CASE2/'
+# average_file_path = '/home/wangcong/projects/cimsimulator/average_files/ResNet18/LSQ4/ADC/2bit/CASE2/'
+average_file_path = './average_files/ResNet18/WAGE7/CASE1/'
 layer_list = [
             [7,7,  3, 64,224,224, 2, 2, 0,average_file_path + 'layer1.csv', average_file_path + 'layer1weight_shift.csv', 'layer1', 'Conv'],
             

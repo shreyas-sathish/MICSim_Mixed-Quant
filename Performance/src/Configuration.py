@@ -4,7 +4,8 @@ class configuration():
     def __init__(self):
         self.modeltype='cnn'
         self.numBitInput = 8
-        self.numBitWeight = 8
+        # self.numBitWeight = 8
+        self.numBitWeight = 3
         # "Unsign" "Sign"
         self.weightmapping = "Sign"
         self.inputmapping = "Sign"
@@ -126,7 +127,7 @@ class configuration():
         self.widthSRAMCellPMOS = 1 
         self.widthAccessCMOS = 1
         self.minSenseVoltage = 0.1
-        self.readVoltage = 0.5          #   On-chip read voltage for memory cell
+        self.readVoltage = 0.5          #   On-xp read voltage for memory cell
         self.readPulseWidth = 10e-9     #   read pulse width in sec
         self.accessVoltage = 1.1        #   Gate voltage for the transistor in 1T1R
         self.writeVoltage = 2           #   Enable level shifer if writeVoltage > 1.5V
@@ -138,7 +139,7 @@ class configuration():
         #1: cell.memCellType = Type::SRAM
         #2: cell.memCellType = Type::RRAM
         #3: cell.memCellType = Type::FeFET
-        self.StaticMVMCellBit = 4 # SRAM=1, RRAM=1,2,4
+        self.StaticMVMCellBit = 2 # SRAM=1, RRAM=1,2,4
         self.StaticMVMresistanceOn = 240*1e3                    #// Ron resistance at Vr in the reported measurement data (need to recalculate below if considering the nonlinearity)
         self.StaticMVMresistanceOff = 240*1e5          #// Roff resistance at Vr in the reported measurement dat (need to recalculate below if considering the nonlinearity)
         self.StaticMVMresistanceAccess = self.StaticMVMresistanceOn*0.25
@@ -188,6 +189,7 @@ class configuration():
 
     def settings_generation(self):
         # set parameter
+        self.levelOutput = 2 ** self.numBitInput
         input_param = neurosim.InputParameter()
         input_param.temperature =  self.temp
         input_param.transistorType = neurosim.TransistorType.conventional
@@ -195,6 +197,10 @@ class configuration():
         input_param.processNode = self.technode
         tech = neurosim.Technology()
         tech.Configure(self.technode, neurosim.DeviceRoadmap.LSTP, neurosim.TransistorType.conventional)
+
+        
+        # input_param.numBitInput = self.numBitInput
+        # input_param.numBitWeight = self.numBitWeight
         
         
         # set static mvm subarray's cell parameter.

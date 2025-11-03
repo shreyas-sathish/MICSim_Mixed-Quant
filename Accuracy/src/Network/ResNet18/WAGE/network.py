@@ -246,7 +246,21 @@ def _resnet(arch, block, layers, pretrained, progress, args, **kwargs):
     model = ResNet(block, layers, args, **kwargs)
     if Pretrained == 'True':
         print("load model: "+savedModel)
-        model.load_state_dict(torch.load(savedModel))
+        # Load checkpoint safely
+        state_dict = torch.load(savedModel, map_location='cpu')
+
+        # Load weights with relaxed matching (ignore missing/unexpected keys)
+        missing, unexpected = model.load_state_dict(state_dict, strict=False)
+
+        # Optional: print summary for debugging
+        if missing:
+            print("[Warning] Missing keys in loaded state_dict:")
+            for k in missing:
+                print("   ", k)
+        if unexpected:
+            print("[Warning] Unexpected keys in loaded state_dict:")
+            for k in unexpected:
+                print("   ", k)
     return model
 
 
