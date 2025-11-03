@@ -14,6 +14,7 @@
       - [2. Configure the settings of Software Performance](#2-configure-the-settings-of-software-performance)
       - [3. Run Software Performance Test](#3-run-software-performance-test)
       - [4. Run Hardware Performance Test](#4-run-hardware-performance-test)
+  - [Running Layer-wise Quantization Schemes](#Running-Layer-wise-Quantization-Schemes)
   - [Citation](#citation)
   - [Contributing](#contributing)
   - [Contact](#contact)
@@ -170,6 +171,24 @@ After that, run the following script to get the evualtion result:
 ```bash
 $ python script_example/performance/main_cnn.py
 ```
+## Running Layer-wise Quantization Schemes
+
+Note: This is the only section of the ReadMe that is being modified.
+To evaluate the accuracy of mixed precision scheme,
+
+```bash
+$ python script_example/accuracy/cnn-toy.py
+```
+
+Make sure to update the required configuration of precision in the config file: `Accuracy/config/resnet18/config_resnet18_mixed_prec.ini`.
+
+To evaluate the performance of mixed precision scheme on hardware,
+
+```bash
+$ python script_example/performance/main_vgg16.py
+```
+
+The mixed-precision configuration can be updated in the `layer_list` within `main_vgg16.py` file according to the format mentioned.
 
 ## Citation
 
